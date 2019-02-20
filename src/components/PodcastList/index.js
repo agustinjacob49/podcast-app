@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import PodcastItem from '../PodcastItem';
 import GridList from '@material-ui/core/GridList';
 import GridListTile from '@material-ui/core/GridListTile';
+import withWidth, { isWidthUp } from '@material-ui/core/withWidth';
 import './index.css';
 
 
@@ -23,7 +24,33 @@ const styles = theme => ({
     },
   });
 
-const PodcastList = ({podcasts}) => {
+  
+
+const PodcastList = ({podcasts, width}) => {
+
+
+  const getGridListCols = () => {
+    if (isWidthUp('xl', width)) {
+      return 8;
+    }
+
+    if (isWidthUp('lg', width)) {
+      return 6;
+    }
+
+    if (isWidthUp('md', width)) {
+      return 4;
+    }
+
+    if (isWidthUp('sm', width)) {
+      return 2;
+    }
+
+    if (isWidthUp('xs', width)) {
+      return 1
+    }
+    
+  }
     
     const renderPodcastItem = podcasts => {
         console.log(podcasts);
@@ -35,7 +62,7 @@ const PodcastList = ({podcasts}) => {
     }
     
     return (
-        <GridList cellHeight={300}  className="gridList" cols={6}>
+        <GridList cellHeight={300}  className="gridList" cols={getGridListCols()}>
             { renderPodcastItem(podcasts) } 
         </GridList>
     );
@@ -45,4 +72,4 @@ PodcastList.propTypes = {
   podcasts : PropTypes.array.isRequired,
 };
 
-export default PodcastList;
+export default withWidth()(PodcastList);

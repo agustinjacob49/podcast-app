@@ -27,6 +27,7 @@ class PodcastItem extends Component {
         const {id} = this.state.podcast;
         this.props.history.push(`/podcast/${id}`);
     }
+
     render (){
     const {podcast} = this.state;
     return (
@@ -41,7 +42,7 @@ class PodcastItem extends Component {
                     title={podcast.title}
                     />
                     <CardContent>
-                    <Typography gutterBottom variant="h5" component="h2">
+                    <Typography gutterBottom variant="subtitle2">
                     {podcast.title}
                     </Typography>
                     </CardContent>
